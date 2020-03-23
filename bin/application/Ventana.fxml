@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane prefHeight="675.0" prefWidth="1300.0" style="-fx-background-color: #2D3447;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.Controller">
+   
+   <children>
+      <MenuBar prefWidth="1350.0">
+        <menus>
+          <Menu fx:id="menuUsuarios" mnemonicParsing="false" text="Usuarios" visible="false">
+            <items>
+              <MenuItem fx:id="userCreate" mnemonicParsing="false" onAction="#actionMenu" text="Crear" />
+                  <MenuItem mnemonicParsing="false" onAction="#actionMenu" text="Listar " />
+                  <MenuItem mnemonicParsing="false" onAction="#actionMenu" text="Modificar" />
+                  <MenuItem mnemonicParsing="false" onAction="#actionMenu" text="Eliminar" />
+            </items>
+          </Menu>
+          <Menu fx:id="menuEventos" mnemonicParsing="false" text="Eventos" visible="false">
+            <items>
+              <MenuItem mnemonicParsing="false" onAction="#actionMenu" text="Crear" />
+                  <MenuItem mnemonicParsing="false" onAction="#actionMenu" text="Listar" />
+                  <MenuItem mnemonicParsing="false" onAction="#actionMenu" text="Modificar" />
+                  <MenuItem mnemonicParsing="false" onAction="#actionMenu" text="Eliminar" />
+            </items>
+          </Menu>
+            <Menu fx:id="menuConfig" mnemonicParsing="false" text="Ajustes" visible="false">
+               <items>
+                  <MenuItem mnemonicParsing="false" text="Aspecto" />
+                  <MenuItem fx:id="userClose" mnemonicParsing="false" onAction="#actionMenu" text="Cerrar Sesión" />
+               </items></Menu>
+        </menus>
+      </MenuBar>
+      <Pane fx:id="paneAdduser" layoutY="27.0" prefHeight="675.0" prefWidth="1300.0" visible="false">
+         <children>
+            <Label layoutX="370.0" layoutY="44.0" scaleX="2.0" scaleY="2.0" text="Información del Empleado" textFill="#050094">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+            </Label>
+            <Button fx:id="createUserInfo" layoutX="993.0" layoutY="585.0" minHeight="19.0" mnemonicParsing="false" onAction="#createUsers" prefHeight="32.0" prefWidth="92.0" scaleX="2.5" scaleY="1.5" text="Siguiente" />
+            <TextField layoutX="268.0" layoutY="140.0" prefHeight="36.0" prefWidth="326.0" promptText="Nombre" />
+            <TextField layoutX="268.0" layoutY="200.0" prefHeight="36.0" prefWidth="326.0" promptText="Primer Apellido" />
+            <TextField layoutX="268.0" layoutY="260.0" prefHeight="36.0" prefWidth="326.0" promptText="Segundo Apellido" />
+            <TextField layoutX="822.0" layoutY="260.0" prefHeight="36.0" prefWidth="326.0" promptText="DNI" />
+            <TextField layoutX="822.0" layoutY="140.0" prefHeight="36.0" prefWidth="326.0" promptText="Email" />
+            <TextField layoutX="822.0" layoutY="200.0" prefHeight="36.0" prefWidth="326.0" promptText="Confirmar Email" />
+            <ComboBox fx:id="crearComboCiudad" layoutX="268.0" layoutY="340.0" prefHeight="29.0" prefWidth="298.0" promptText="Provincia" />
+            <TextField layoutX="822.0" layoutY="320.0" prefHeight="36.0" prefWidth="326.0" promptText="Teléfono" />
+            <TextField layoutX="268.0" layoutY="400.0" prefHeight="36.0" prefWidth="326.0" promptText="Domicilio" />
+            <TextField layoutX="268.0" layoutY="460.0" prefHeight="36.0" prefWidth="326.0" promptText="Codigo Postal" />
+         </children>
+      </Pane>
+      <Pane fx:id="paneLogin" layoutY="27.0" prefHeight="675.0" prefWidth="1300.0">
+         <children>
+            <TextField fx:id="loginUser" layoutX="574.0" layoutY="310.0" promptText="Username" scaleX="2.0" scaleY="1.5" />
+            <PasswordField fx:id="loginPassw" layoutX="574.0" layoutY="400.0" promptText="Password" scaleX="2.0" scaleY="1.5" />
+            <Button fx:id="loginEnter" layoutX="609.0" layoutY="546.0" mnemonicParsing="false" onAction="#menuLogin" prefHeight="32.0" prefWidth="80.0" scaleX="2.0" scaleY="2.0" style="-fx-background-color: #2196f3;" text="Entrar" />
+            <Label layoutX="1007.0" layoutY="4.0" prefHeight="53.0" prefWidth="171.0" text="No eres miembro?" textFill="#a0a1a2">
+               <font>
+                  <Font size="20.0" />
+               </font>
+            </Label>
+            <Button layoutX="1188.0" layoutY="15.0" mnemonicParsing="false" style="-fx-background-color: #3C58FA;" text="Registrarse" textFill="#bdbdbd" />
+            <ImageView fitHeight="183.0" fitWidth="287.0" layoutX="559.0" layoutY="22.0" pickOnBounds="true" preserveRatio="true" scaleX="1.2" scaleY="1.2">
+               <image>
+                  <Image url="Imagen.png" />
+               </image>
+            </ImageView>
+            <Label layoutX="76.0" layoutY="21.0" prefHeight="53.0" prefWidth="118.0" text="Problemas?" textFill="#a0a1a2">
+               <font>
+                  <Font size="20.0" />
+               </font>
+            </Label>
+            <ImageView fitHeight="43.0" fitWidth="50.0" layoutX="31.0" layoutY="26.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="42491700-icono-problema-de-botones-primitivos-overcolor-set-este-botón-plano-cuadrado-redondeado-se-dibuja-con-l.jpg" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="54.0" fitWidth="150.0" layoutX="424.0" layoutY="304.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="Iconos-condiciones-2.0_Usuarios_gris.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="64.0" fitWidth="54.0" layoutX="424.0" layoutY="379.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="password-icon-png-transparent-6.png" />
+               </image>
+            </ImageView>
+            <Label fx:id="errorLogin" layoutX="522.0" layoutY="461.0" prefHeight="27.0" prefWidth="257.0" text="Usuario o contraseña incorrecto" textFill="RED" visible="false">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Label>
+         </children>
+      </Pane>
+      <Pane fx:id="paneMain" layoutY="27.0" prefHeight="675.0" prefWidth="1300.0" visible="false">
+         <children>
+            <Text fill="#848484" layoutX="446.0" layoutY="638.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Aplicación creada por Root" wrappingWidth="408.3925781249999">
+               <font>
+                  <Font name="System Bold Italic" size="32.0" />
+               </font>
+            </Text>
+            <Text fill="#2200f7" layoutX="281.0" layoutY="78.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Bienvenido a la aplicación de administración de" wrappingWidth="737.9926147460936">
+               <font>
+                  <Font name="System Bold Italic" size="32.0" />
+               </font>
+            </Text>
+            <Text fill="#0578ff" layoutX="557.0" layoutY="139.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Inter" wrappingWidth="73.19259643554676">
+               <font>
+                  <Font name="System Bold Italic" size="32.0" />
+               </font>
+            </Text>
+            <Text fill="#7c7c7c" layoutX="631.0" layoutY="140.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Cruises" wrappingWidth="111.41926574707009">
+               <font>
+                  <Font name="System Bold Italic" size="32.0" />
+               </font>
+            </Text>
+            <ImageView fitHeight="212.0" fitWidth="738.0" layoutX="281.0" layoutY="267.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="Logo-Intercruises-TCF.jpg" />
+               </image>
+            </ImageView>
+         </children>
+      </Pane>
+      <Pane fx:id="paneCreateAcc" layoutX="10.0" layoutY="37.0" prefHeight="675.0" prefWidth="1300.0" visible="false">
+         <children>
+            <Label layoutX="561.0" layoutY="88.0" prefHeight="39.0" prefWidth="179.0" scaleX="2.0" scaleY="2.0" text="Creación de cuenta" textFill="#050094">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+            </Label>
+            <TextField layoutX="487.0" layoutY="208.0" prefHeight="36.0" prefWidth="326.0" promptText="Nombre de usuario" />
+            <TextField layoutX="487.0" layoutY="268.0" prefHeight="36.0" prefWidth="326.0" promptText="Contraseña" />
+            <TextField layoutX="487.0" layoutY="328.0" prefHeight="36.0" prefWidth="326.0" promptText="Confirmar contraseña" />
+            <Button fx:id="createUser" layoutX="595.0" layoutY="461.0" minHeight="19.0" mnemonicParsing="false" onAction="#createUsers" prefHeight="39.0" prefWidth="111.0" text="Finalizar" />
+         </children>
+      </Pane>
+   </children>
+</AnchorPane>
