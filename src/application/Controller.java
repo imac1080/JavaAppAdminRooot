@@ -66,10 +66,11 @@ public class Controller implements Initializable {
 		menuItems.add(menuEventos);
 		
 		ivProblemas.setImage(new Image("/Imagenes/LoginError.jpg"));
-		ivUser.setImage(new Image("/Imagenes/LoginError.jpg"));
-		ivPassword.setImage(new Image("/Imagenes/LoginError.jpg"));
-		ivLoginLogo.setImage(new Image("/Imagenes/LoginError.jpg"));
-		ivMainLogo.setImage(new Image("/Imagenes/LoginError.jpg"));
+		ivUser.setImage(new Image("/Imagenes/LoginUser.png"));
+		ivPassword.setImage(new Image("/Imagenes/LoginPassword.png"));
+		ivLoginLogo.setImage(new Image("/Imagenes/LoginLogoInter.png"));
+		ivMainLogo.setImage(new Image("/Imagenes/MainLogo.jpg"));
+		
 		
 		
 

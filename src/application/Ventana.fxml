@@ -83,9 +83,9 @@
             </Label>
             <ImageView fx:id="ivProblemas" fitHeight="43.0" fitWidth="50.0" layoutX="31.0" layoutY="26.0" pickOnBounds="true" preserveRatio="true">
             </ImageView>
-            <ImageView fx:id="ivUser" fitHeight="54.0" fitWidth="150.0" layoutX="424.0" layoutY="304.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="ivUser" fitHeight="54.0" fitWidth="150.0" layoutX="423.0" layoutY="294.0" pickOnBounds="true" preserveRatio="true">
             </ImageView>
-            <ImageView fx:id="ivPassword" fitHeight="64.0" fitWidth="54.0" layoutX="424.0" layoutY="379.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="ivPassword" fitHeight="64.0" fitWidth="54.0" layoutX="424.0" layoutY="381.0" pickOnBounds="true" preserveRatio="true">
                
             </ImageView>
             <Label fx:id="errorLogin" layoutX="522.0" layoutY="461.0" prefHeight="27.0" prefWidth="257.0" text="Usuario o contraseña incorrecto" textFill="RED" visible="false">
