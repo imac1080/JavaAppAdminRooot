@@ -22,6 +22,8 @@ import javafx.scene.control.MenuItem;
 import javafx.scene.control.MultipleSelectionModel;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 
@@ -49,6 +51,8 @@ public class Controller implements Initializable {
 	private ComboBox<String> crearComboCiudad;
 	@FXML
 	private Label errorLogin;
+	@FXML
+	private ImageView ivProblemas;
 
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
@@ -60,6 +64,8 @@ public class Controller implements Initializable {
 		menuItems.add(menuConfig);
 		menuItems.add(menuUsuarios);
 		menuItems.add(menuEventos);
+		
+		ivProblemas.setImage(new Image("Imagen.png"));
 
 		ObservableList<String> items = FXCollections.observableArrayList();
 		items.addAll("Alava", "Albacete", "Alicante", "Almería", "Asturias", "Avila", "Badajoz", "Barcelona", "Burgos",
@@ -70,6 +76,8 @@ public class Controller implements Initializable {
 				"Toledo", "Valencia", "Valladolid", "Vizcaya", "Zamora", "Zaragoza");
 		crearComboCiudad.setItems(items);
 	}
+	
+	
 
 	@FXML
 	private void menuLogin(ActionEvent event) throws InterruptedException { // Login

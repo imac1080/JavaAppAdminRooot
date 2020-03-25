@@ -8,7 +8,6 @@
 <?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.TextField?>
-<?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
@@ -75,29 +74,20 @@
             </Label>
             <Button layoutX="1188.0" layoutY="15.0" mnemonicParsing="false" style="-fx-background-color: #3C58FA;" text="Registrarse" textFill="#bdbdbd" />
             <ImageView fitHeight="183.0" fitWidth="287.0" layoutX="559.0" layoutY="22.0" pickOnBounds="true" preserveRatio="true" scaleX="1.2" scaleY="1.2">
-               <image>
-                  <Image url="Imagen.png" />
-               </image>
+
             </ImageView>
             <Label layoutX="76.0" layoutY="21.0" prefHeight="53.0" prefWidth="118.0" text="Problemas?" textFill="#a0a1a2">
                <font>
                   <Font size="20.0" />
                </font>
             </Label>
-            <ImageView fitHeight="43.0" fitWidth="50.0" layoutX="31.0" layoutY="26.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="42491700-icono-problema-de-botones-primitivos-overcolor-set-este-botón-plano-cuadrado-redondeado-se-dibuja-con-l.jpg" />
-               </image>
+            <ImageView fx:id="ivProblemas" fitHeight="43.0" fitWidth="50.0" layoutX="31.0" layoutY="26.0" pickOnBounds="true" preserveRatio="true">
+
             </ImageView>
             <ImageView fitHeight="54.0" fitWidth="150.0" layoutX="424.0" layoutY="304.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="Iconos-condiciones-2.0_Usuarios_gris.png" />
-               </image>
             </ImageView>
             <ImageView fitHeight="64.0" fitWidth="54.0" layoutX="424.0" layoutY="379.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="password-icon-png-transparent-6.png" />
-               </image>
+               
             </ImageView>
             <Label fx:id="errorLogin" layoutX="522.0" layoutY="461.0" prefHeight="27.0" prefWidth="257.0" text="Usuario o contraseña incorrecto" textFill="RED" visible="false">
                <font>
@@ -129,9 +119,6 @@
                </font>
             </Text>
             <ImageView fitHeight="212.0" fitWidth="738.0" layoutX="281.0" layoutY="267.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="Logo-Intercruises-TCF.jpg" />
-               </image>
             </ImageView>
          </children>
       </Pane>
