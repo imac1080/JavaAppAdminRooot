@@ -1,5 +1,6 @@
 package application;
 
+import java.awt.event.ActionListener;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
@@ -32,7 +33,7 @@ public class Controller implements Initializable {
 	private String password = "123456";
 	private ArrayList<Pane> pane = new ArrayList<>();
 	private ArrayList<MenuItem> menuItems = new ArrayList<>();
-
+	private int delay = 3000; // milliseconds
 	@FXML
 	private AnchorPane mainPane;
 	@FXML
@@ -64,15 +65,12 @@ public class Controller implements Initializable {
 		menuItems.add(menuConfig);
 		menuItems.add(menuUsuarios);
 		menuItems.add(menuEventos);
-		
+
 		ivProblemas.setImage(new Image("/Imagenes/LoginError.jpg"));
 		ivUser.setImage(new Image("/Imagenes/LoginUser.png"));
 		ivPassword.setImage(new Image("/Imagenes/LoginPassword.png"));
 		ivLoginLogo.setImage(new Image("/Imagenes/LoginLogoInter.png"));
 		ivMainLogo.setImage(new Image("/Imagenes/MainLogo.jpg"));
-		
-		
-		
 
 		ObservableList<String> items = FXCollections.observableArrayList();
 		items.addAll("Alava", "Albacete", "Alicante", "Almería", "Asturias", "Avila", "Badajoz", "Barcelona", "Burgos",
@@ -83,13 +81,18 @@ public class Controller implements Initializable {
 				"Toledo", "Valencia", "Valladolid", "Vizcaya", "Zamora", "Zaragoza");
 		crearComboCiudad.setItems(items);
 	}
-	
-	
 
 	@FXML
 	private void menuLogin(ActionEvent event) throws InterruptedException { // Login
 		Button btn = (Button) event.getSource();
 		btn.getOnAction();
+		ActionListener taskPerformer = new ActionListener() {
+
+			@Override
+			public void actionPerformed(java.awt.event.ActionEvent e) {
+				errorLogin.setVisible(false);
+			}
+		};
 		if (loginUser.getText().equals(user)) {
 			if (loginPassw.getText().equals(password)) { // Quitamos el login y poenos los menu items y la pagina
 															// inicial.
@@ -99,28 +102,32 @@ public class Controller implements Initializable {
 				itemsTrue();
 				paneMain.setVisible(true);
 			} else {
-				/*
-				System.out.println("Hola");
+				errorLogin.setText("La contraseña es incorrecta");
 				errorLogin.setVisible(true);
-				Thread.sleep(2000);
-				*/
-				
-				Alert alert = new Alert(AlertType.ERROR);
+				javax.swing.Timer tick = new javax.swing.Timer(delay, taskPerformer);
+				tick.setRepeats(false);
+				tick.start();
+				/*Alert alert = new Alert(AlertType.ERROR);
 				alert.setTitle("Error");
 				alert.setHeaderText("Password incorrecto");
-				alert.showAndWait();
+				alert.showAndWait();*/
 				loginPassw.clear();
 				loginUser.clear();
 			}
 		} else {
-			Alert alert = new Alert(AlertType.ERROR);
+			errorLogin.setText("El usuario es incorrecto");
+			errorLogin.setVisible(true);
+			javax.swing.Timer tick = new javax.swing.Timer(delay, taskPerformer);
+			tick.setRepeats(false);
+			tick.start();
+			
+			/*Alert alert = new Alert(AlertType.ERROR);
 			alert.setTitle("Error");
 			alert.setHeaderText("Datos de usuario incorrectos");
-			alert.showAndWait();
+			alert.showAndWait();*/
 			loginPassw.clear();
 			loginUser.clear();
 		}
-		
 
 	}
 
