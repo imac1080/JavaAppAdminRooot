@@ -52,7 +52,7 @@ public class Controller implements Initializable {
 	@FXML
 	private Label errorLogin;
 	@FXML
-	private ImageView ivProblemas;
+	private ImageView ivProblemas, ivUser, ivPassword, ivLoginLogo, ivMainLogo;
 
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
@@ -65,7 +65,13 @@ public class Controller implements Initializable {
 		menuItems.add(menuUsuarios);
 		menuItems.add(menuEventos);
 		
-		ivProblemas.setImage(new Image("Imagen.png"));
+		ivProblemas.setImage(new Image("/Imagenes/LoginError.jpg"));
+		ivUser.setImage(new Image("/Imagenes/LoginError.jpg"));
+		ivPassword.setImage(new Image("/Imagenes/LoginError.jpg"));
+		ivLoginLogo.setImage(new Image("/Imagenes/LoginError.jpg"));
+		ivMainLogo.setImage(new Image("/Imagenes/LoginError.jpg"));
+		
+		
 
 		ObservableList<String> items = FXCollections.observableArrayList();
 		items.addAll("Alava", "Albacete", "Alicante", "Almería", "Asturias", "Avila", "Badajoz", "Barcelona", "Burgos",
