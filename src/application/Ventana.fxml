@@ -64,7 +64,7 @@
       </Pane>
       <Pane fx:id="paneLogin" layoutY="27.0" prefHeight="675.0" prefWidth="1300.0">
          <children>
-            <TextField fx:id="loginUser" layoutX="574.0" layoutY="310.0" promptText="Username" scaleX="2.0" scaleY="1.5" />
+            <TextField fx:id="loginUser" layoutX="574.0" layoutY="310.0" promptText="Email" scaleX="2.0" scaleY="1.5" />
             <PasswordField fx:id="loginPassw" layoutX="574.0" layoutY="400.0" promptText="Password" scaleX="2.0" scaleY="1.5" />
             <Button fx:id="loginEnter" layoutX="609.0" layoutY="546.0" mnemonicParsing="false" onAction="#menuLogin" prefHeight="32.0" prefWidth="80.0" scaleX="2.0" scaleY="2.0" style="-fx-background-color: #2196f3;" text="Entrar" />
             <Label layoutX="1007.0" layoutY="4.0" prefHeight="53.0" prefWidth="171.0" text="No eres miembro?" textFill="#a0a1a2">

@@ -4,23 +4,19 @@ import java.awt.event.ActionListener;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
-import java.util.Timer;
-import java.util.TimerTask;
-import java.util.concurrent.TimeUnit;
+
+import org.json.JSONObject;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DialogPane;
 import javafx.scene.control.Label;
 import javafx.scene.control.MenuItem;
-import javafx.scene.control.MultipleSelectionModel;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
@@ -29,8 +25,9 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 
 public class Controller implements Initializable {
-	private String user = "Sergio";
-	private String password = "123456";
+	//private String user = "Sergio";
+	//private String password = "123456";
+	private JSONObject user;
 	private ArrayList<Pane> pane = new ArrayList<>();
 	private ArrayList<MenuItem> menuItems = new ArrayList<>();
 	private int delay = 3000; // milliseconds
@@ -84,6 +81,9 @@ public class Controller implements Initializable {
 
 	@FXML
 	private void menuLogin(ActionEvent event) throws InterruptedException { // Login
+		String email=loginUser.getText();
+		String passwrd=loginPassw.getText();
+		
 		Button btn = (Button) event.getSource();
 		btn.getOnAction();
 		ActionListener taskPerformer = new ActionListener() {
@@ -93,7 +93,29 @@ public class Controller implements Initializable {
 				errorLogin.setVisible(false);
 			}
 		};
-		if (loginUser.getText().equals(user)) {
+		try {
+			user=Conexion.Post_JSON_Login(email, passwrd);
+		} catch (Exception e) {
+			System.out.println("Auth fallida");
+		}
+		if(user!=null) {
+			loginPassw.clear();
+			loginUser.clear();
+			paneLogin.setVisible(false);
+			itemsTrue();
+			paneMain.setVisible(true);
+		}else {
+			errorLogin.setText("Credenciales incorrectos");
+			errorLogin.setVisible(true);
+			javax.swing.Timer tick = new javax.swing.Timer(delay, taskPerformer);
+			tick.setRepeats(false);
+			tick.start();
+			loginPassw.clear();
+			loginUser.clear();
+		}
+		
+		
+		/*if (loginUser.getText().equals(user)) {
 			if (loginPassw.getText().equals(password)) { // Quitamos el login y poenos los menu items y la pagina
 															// inicial.
 				loginPassw.clear();
@@ -107,10 +129,7 @@ public class Controller implements Initializable {
 				javax.swing.Timer tick = new javax.swing.Timer(delay, taskPerformer);
 				tick.setRepeats(false);
 				tick.start();
-				/*Alert alert = new Alert(AlertType.ERROR);
-				alert.setTitle("Error");
-				alert.setHeaderText("Password incorrecto");
-				alert.showAndWait();*/
+			
 				loginPassw.clear();
 				loginUser.clear();
 			}
@@ -120,14 +139,9 @@ public class Controller implements Initializable {
 			javax.swing.Timer tick = new javax.swing.Timer(delay, taskPerformer);
 			tick.setRepeats(false);
 			tick.start();
-			
-			/*Alert alert = new Alert(AlertType.ERROR);
-			alert.setTitle("Error");
-			alert.setHeaderText("Datos de usuario incorrectos");
-			alert.showAndWait();*/
 			loginPassw.clear();
 			loginUser.clear();
-		}
+		}*/
 
 	}
 
@@ -142,6 +156,8 @@ public class Controller implements Initializable {
 		case "userClose":
 			paneLogin.setVisible(true);
 			itemsFalse();
+			Conexion.Post_JSON_LogOutAll(user);
+			user=null;
 			break;
 		default:
 			break;
