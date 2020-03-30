@@ -1,46 +1,41 @@
 package Objetos;
 
+import java.sql.Date;
+
 public class Users {
-	private String nombre;
-	private String apellido1;
-	private String apellido2;
-	private String dni;
-	private String email;
-	private String password;
-	
-	public Users(String nombre, String apellido1, String apellido2, String dni, String email, String password) {
+	private String name,surname,email,password, province,address,cp,dni;
+	private Date birthday;
+	private String phoneNumber,language;
+	public Users(String name, String surname, String email, String password, String province, String address, String cp,
+			String dni, Date birthday, String phoneNumber, String language) {
 		super();
-		this.nombre = nombre;
-		this.apellido1 = apellido1;
-		this.apellido2 = apellido2;
-		this.dni = dni;
+		this.name = name;
+		this.surname = surname;
 		this.email = email;
 		this.password = password;
-	}
-
-	public String getNombre() {
-		return nombre;
-	}
-	public void setNombre(String nombre) {
-		this.nombre = nombre;
-	}
-	public String getApellido1() {
-		return apellido1;
-	}
-	public void setApellido1(String apellido1) {
-		this.apellido1 = apellido1;
-	}
-	public String getApellido2() {
-		return apellido2;
-	}
-	public void setApellido2(String apellido2) {
-		this.apellido2 = apellido2;
-	}
-	public String getDni() {
-		return dni;
-	}
-	public void setDni(String dni) {
+		this.province = province;
+		this.address = address;
+		this.cp = cp;
 		this.dni = dni;
+		this.birthday = birthday;
+		this.phoneNumber = phoneNumber;
+		this.language = language;
+	}
+	public Users() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
+	}
+	public String getSurname() {
+		return surname;
+	}
+	public void setSurname(String surname) {
+		this.surname = surname;
 	}
 	public String getEmail() {
 		return email;
@@ -54,11 +49,53 @@ public class Users {
 	public void setPassword(String password) {
 		this.password = password;
 	}
-	
+	public String getProvince() {
+		return province;
+	}
+	public void setProvince(String province) {
+		this.province = province;
+	}
+	public String getAddress() {
+		return address;
+	}
+	public void setAddress(String address) {
+		this.address = address;
+	}
+	public String getCp() {
+		return cp;
+	}
+	public void setCp(String cp) {
+		this.cp = cp;
+	}
+	public String getDni() {
+		return dni;
+	}
+	public void setDni(String dni) {
+		this.dni = dni;
+	}
+	public Date getBirthday() {
+		return birthday;
+	}
+	public void setBirthday(Date birthday) {
+		this.birthday = birthday;
+	}
+	public String getPhoneNumber() {
+		return phoneNumber;
+	}
+	public void setPhoneNumber(String phoneNumber) {
+		this.phoneNumber = phoneNumber;
+	}
+	public String getLanguage() {
+		return language;
+	}
+	public void setLanguage(String language) {
+		this.language = language;
+	}
 	@Override
 	public String toString() {
-		return "Users [nombre=" + nombre + ", apellido1=" + apellido1 + ", apellido2=" + apellido2 + ", dni=" + dni
-				+ ", email=" + email + ", password=" + password + "]";
+		return "Users [name=" + name + ", surname=" + surname + ", email=" + email + ", password=" + password
+				+ ", province=" + province + ", address=" + address + ", cp=" + cp + ", dni=" + dni + ", birthday="
+				+ birthday + ", phoneNumber=" + phoneNumber + ", language=" + language + "]";
 	}
-
+	
 }
