@@ -25,9 +25,10 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 
 public class Controller implements Initializable {
-	//private String user = "Sergio";
-	//private String password = "123456";
-	private JSONObject user;
+	// private String user = "Sergio";
+	// private String password = "123456";
+	private JSONObject user, newUser;
+	private ArrayList<String> userFields;
 	private ArrayList<Pane> pane = new ArrayList<>();
 	private ArrayList<MenuItem> menuItems = new ArrayList<>();
 	private int delay = 3000; // milliseconds
@@ -36,13 +37,14 @@ public class Controller implements Initializable {
 	@FXML
 	private MenuItem menuUsuarios, menuEventos, menuConfig;
 	@FXML
-	private TextField loginUser, userCreateName, userCreateSurname, userCreateDni, userCreateEmail;
+	private TextField loginUser, userName, userSurname1, userSurname2, userDNI, userEmail, userEmailConfirm,
+			userPhoneNumber, userAddress, userCP;
 	@FXML
 	private PasswordField loginPassw, userCreatePassw, userCreatePass2;
 	@FXML
 	private Pane paneAdduser, paneLogin, paneMain, paneCreateAcc;
 	@FXML
-	private Button loginEnter, createUserInfo, createUser, loginBtnPasswError;
+	private Button loginEnter, createUserInfo, createUser, loginBtnPasswError, singUpButton;
 	@FXML
 	private DialogPane loginPasswError;
 	@FXML
@@ -81,9 +83,9 @@ public class Controller implements Initializable {
 
 	@FXML
 	private void menuLogin(ActionEvent event) throws InterruptedException { // Login
-		String email=loginUser.getText();
-		String passwrd=loginPassw.getText();
-		
+		String email = loginUser.getText();
+		String passwrd = loginPassw.getText();
+
 		Button btn = (Button) event.getSource();
 		btn.getOnAction();
 		ActionListener taskPerformer = new ActionListener() {
@@ -94,17 +96,17 @@ public class Controller implements Initializable {
 			}
 		};
 		try {
-			user=Conexion.Post_JSON_Login(email, passwrd);
+			user = Conexion.Post_JSON_Login(email, passwrd);
 		} catch (Exception e) {
 			System.out.println("Auth fallida");
 		}
-		if(user!=null) {
+		if (user != null) {
 			loginPassw.clear();
 			loginUser.clear();
 			paneLogin.setVisible(false);
 			itemsTrue();
 			paneMain.setVisible(true);
-		}else {
+		} else {
 			errorLogin.setText("Credenciales incorrectos");
 			errorLogin.setVisible(true);
 			javax.swing.Timer tick = new javax.swing.Timer(delay, taskPerformer);
@@ -113,35 +115,23 @@ public class Controller implements Initializable {
 			loginPassw.clear();
 			loginUser.clear();
 		}
-		
-		
-		/*if (loginUser.getText().equals(user)) {
-			if (loginPassw.getText().equals(password)) { // Quitamos el login y poenos los menu items y la pagina
-															// inicial.
-				loginPassw.clear();
-				loginUser.clear();
-				paneLogin.setVisible(false);
-				itemsTrue();
-				paneMain.setVisible(true);
-			} else {
-				errorLogin.setText("La contraseña es incorrecta");
-				errorLogin.setVisible(true);
-				javax.swing.Timer tick = new javax.swing.Timer(delay, taskPerformer);
-				tick.setRepeats(false);
-				tick.start();
-			
-				loginPassw.clear();
-				loginUser.clear();
-			}
-		} else {
-			errorLogin.setText("El usuario es incorrecto");
-			errorLogin.setVisible(true);
-			javax.swing.Timer tick = new javax.swing.Timer(delay, taskPerformer);
-			tick.setRepeats(false);
-			tick.start();
-			loginPassw.clear();
-			loginUser.clear();
-		}*/
+
+		/*
+		 * if (loginUser.getText().equals(user)) { if
+		 * (loginPassw.getText().equals(password)) { // Quitamos el login y poenos los
+		 * menu items y la pagina // inicial. loginPassw.clear(); loginUser.clear();
+		 * paneLogin.setVisible(false); itemsTrue(); paneMain.setVisible(true); } else {
+		 * errorLogin.setText("La contraseña es incorrecta");
+		 * errorLogin.setVisible(true); javax.swing.Timer tick = new
+		 * javax.swing.Timer(delay, taskPerformer); tick.setRepeats(false);
+		 * tick.start();
+		 * 
+		 * loginPassw.clear(); loginUser.clear(); } } else {
+		 * errorLogin.setText("El usuario es incorrecto"); errorLogin.setVisible(true);
+		 * javax.swing.Timer tick = new javax.swing.Timer(delay, taskPerformer);
+		 * tick.setRepeats(false); tick.start(); loginPassw.clear(); loginUser.clear();
+		 * }
+		 */
 
 	}
 
@@ -157,12 +147,25 @@ public class Controller implements Initializable {
 			paneLogin.setVisible(true);
 			itemsFalse();
 			Conexion.Post_JSON_LogOutAll(user);
-			user=null;
+			user = null;
 			break;
 		default:
 			break;
 		}
 
+	}
+
+	public void createNewUser() {
+		if (userEmail.getText().equals(userEmailConfirm.getText())) {
+			userFields.add(userName.getText());
+			userFields.add(userSurname1.getText() + " " + userSurname2);
+			userFields.add(userEmail.getText());
+			//userFields.add(menuItems.get((crearComboCiudad.getId()));
+
+			// me faltan campos del usuario para rellenar
+		} else {
+
+		}
 	}
 
 	@FXML
@@ -172,10 +175,15 @@ public class Controller implements Initializable {
 		paneFalse();
 		switch (btn.getId()) {
 		case "createUserInfo":
+			//createNewUser();
 			paneCreateAcc.setVisible(true);
 			break;
 		case "createUser":
 			paneMain.setVisible(true);
+			break;
+		case "singUpButton":
+			paneAdduser.setVisible(true);
+			break;
 		}
 	}
 

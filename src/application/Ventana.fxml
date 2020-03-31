@@ -50,16 +50,16 @@
                </font>
             </Label>
             <Button fx:id="createUserInfo" layoutX="993.0" layoutY="585.0" minHeight="19.0" mnemonicParsing="false" onAction="#createUsers" prefHeight="32.0" prefWidth="92.0" scaleX="2.5" scaleY="1.5" text="Siguiente" />
-            <TextField layoutX="268.0" layoutY="140.0" prefHeight="36.0" prefWidth="326.0" promptText="Nombre" />
-            <TextField layoutX="268.0" layoutY="200.0" prefHeight="36.0" prefWidth="326.0" promptText="Primer Apellido" />
-            <TextField layoutX="268.0" layoutY="260.0" prefHeight="36.0" prefWidth="326.0" promptText="Segundo Apellido" />
-            <TextField layoutX="822.0" layoutY="260.0" prefHeight="36.0" prefWidth="326.0" promptText="DNI" />
-            <TextField layoutX="822.0" layoutY="140.0" prefHeight="36.0" prefWidth="326.0" promptText="Email" />
-            <TextField layoutX="822.0" layoutY="200.0" prefHeight="36.0" prefWidth="326.0" promptText="Confirmar Email" />
+            <TextField fx:id="userName" layoutX="268.0" layoutY="140.0" prefHeight="36.0" prefWidth="326.0" promptText="Nombre" />
+            <TextField fx:id="userSurname1" layoutX="268.0" layoutY="200.0" prefHeight="36.0" prefWidth="326.0" promptText="Primer Apellido" />
+            <TextField fx:id="userSurname2" layoutX="268.0" layoutY="260.0" prefHeight="36.0" prefWidth="326.0" promptText="Segundo Apellido" />
+            <TextField fx:id="userDNI" layoutX="822.0" layoutY="260.0" prefHeight="36.0" prefWidth="326.0" promptText="DNI" />
+            <TextField fx:id="userEmail" layoutX="822.0" layoutY="140.0" prefHeight="36.0" prefWidth="326.0" promptText="Email" />
+            <TextField fx:id="userEmailConfirm" layoutX="822.0" layoutY="200.0" prefHeight="36.0" prefWidth="326.0" promptText="Confirmar Email" />
             <ComboBox fx:id="crearComboCiudad" layoutX="268.0" layoutY="340.0" prefHeight="29.0" prefWidth="298.0" promptText="Provincia" />
-            <TextField layoutX="822.0" layoutY="320.0" prefHeight="36.0" prefWidth="326.0" promptText="Teléfono" />
-            <TextField layoutX="268.0" layoutY="400.0" prefHeight="36.0" prefWidth="326.0" promptText="Domicilio" />
-            <TextField layoutX="268.0" layoutY="460.0" prefHeight="36.0" prefWidth="326.0" promptText="Codigo Postal" />
+            <TextField fx:id="userPhoneNumber" layoutX="822.0" layoutY="320.0" prefHeight="36.0" prefWidth="326.0" promptText="Teléfono" />
+            <TextField fx:id="userAddress" layoutX="268.0" layoutY="400.0" prefHeight="36.0" prefWidth="326.0" promptText="Domicilio" />
+            <TextField fx:id="userCP" layoutX="268.0" layoutY="460.0" prefHeight="36.0" prefWidth="326.0" promptText="Codigo Postal" />
          </children>
       </Pane>
       <Pane fx:id="paneLogin" layoutY="27.0" prefHeight="675.0" prefWidth="1300.0">
@@ -72,7 +72,7 @@
                   <Font size="20.0" />
                </font>
             </Label>
-            <Button layoutX="1188.0" layoutY="15.0" mnemonicParsing="false" style="-fx-background-color: #3C58FA;" text="Registrarse" textFill="#bdbdbd" />
+            <Button fx:id="singUpButton" layoutX="1188.0" layoutY="15.0" mnemonicParsing="false" onAction="#createUsers" style="-fx-background-color: #3C58FA;" text="Registrarse" textFill="#bdbdbd" />
             <ImageView fx:id="ivLoginLogo" fitHeight="183.0" fitWidth="287.0" layoutX="559.0" layoutY="22.0" pickOnBounds="true" preserveRatio="true" scaleX="1.2" scaleY="1.2">
 
             </ImageView>

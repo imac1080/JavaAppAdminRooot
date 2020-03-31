@@ -5,6 +5,9 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.sql.Date;
+import java.util.ArrayList;
+
 import org.apache.commons.io.IOUtils;
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -12,6 +15,8 @@ import org.json.JSONObject;
 
 public class Conexion {
 	private static String url = "https://apiams2root.herokuapp.com";
+	private static String userFields[] = { "name", "surname", "email", "password", "province", "address", "cp", "dni",
+			"bithday", "phonenumber", "language" };
 
 	public static JSONObject Post_JSON_Login(String email, String password) {
 		// Users user=new Users();
@@ -52,6 +57,48 @@ public class Conexion {
 			inS.close();
 			conn.disconnect();
 			System.out.println("User connected successfully");
+			return user;
+		} catch (Exception e) {
+			System.out.println(e);
+		}
+		return null;
+	}
+
+	public static JSONObject Post_JSON_User_Create(ArrayList<String> userField) {
+		// String name, String surname, String email, String password, String province,
+		// String address, String cp, String dni, Date birthday, String phoneNumber,
+		// String language;
+		// Users user=new Users();
+		String query_url = url + "/users";
+		String json = "{\"" + userFields[0] + "\" : \"" + userField.get(0) + "\",";
+		for (int i = 1; i < userFields.length; i++) {
+			if (i == userFields.length - 1) {
+				json = json + "\"" + userFields[i] + "\" : \"" + userField.get(i) + "\"}";
+			}
+
+			else {
+				json = json + "\"" + userFields[i] + "\" : \"" + userField.get(i) + "\",";
+			}
+		}
+		try {
+			URL url = new URL(query_url);
+			HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+			conn.setConnectTimeout(5000);
+			conn.setRequestProperty("Content-Type", "application/json; charset=UTF-8");
+			conn.setDoOutput(true);
+			conn.setDoInput(true);
+			conn.setRequestMethod("POST");
+			OutputStream os = conn.getOutputStream();
+			os.write(json.getBytes("UTF-8"));
+			os.close();
+			// read the response
+			InputStream inS = new BufferedInputStream(conn.getInputStream());
+			String resultado = IOUtils.toString(inS, "UTF-8");
+			JSONObject myResponse = new JSONObject(resultado);
+			JSONObject user = myResponse.getJSONObject("user");
+			inS.close();
+			conn.disconnect();
+			System.out.println("User created successfully");
 			return user;
 		} catch (Exception e) {
 			System.out.println(e);
