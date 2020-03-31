@@ -2,6 +2,8 @@ package application;
 
 import java.awt.event.ActionListener;
 import java.net.URL;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.ArrayList;
@@ -28,24 +30,23 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 
-
 public class Controller implements Initializable {
 	// private String user = "Sergio";
 	// private String password = "123456";
 	private JSONObject user, newUser;
-	private ArrayList<String> userFields=new ArrayList<String>();
+	private ArrayList<String> userFields = new ArrayList<String>();
 	private ArrayList<Pane> pane = new ArrayList<>();
 	private ArrayList<MenuItem> menuItems = new ArrayList<>();
 	private int delay = 3000; // milliseconds
-	  @FXML
-	    private DatePicker userBirthday;
+	@FXML
+	private DatePicker userBirthday;
 	@FXML
 	private AnchorPane mainPane;
 	@FXML
 	private MenuItem menuUsuarios, menuEventos, menuConfig;
 	@FXML
 	private TextField loginUser, userName, userSurname1, userSurname2, userDNI, userEmail, userEmailConfirm,
-			userPhoneNumber, userAddress, userCP,userLanguage,userPassw,userPasswConfirm;
+			userPhoneNumber, userAddress, userCP, userLanguage, userPassw, userPasswConfirm;
 	@FXML
 	private PasswordField loginPassw, userCreatePassw, userCreatePass2;
 	@FXML
@@ -85,7 +86,7 @@ public class Controller implements Initializable {
 				"La Rioja", "Salamanca", "Segovia", "Sevilla", "Soria", "Tarragona", "Santa Cruz de Tenerife", "Teruel",
 				"Toledo", "Valencia", "Valladolid", "Vizcaya", "Zamora", "Zaragoza");
 		crearComboCiudad.setItems(items);
-		
+
 	}
 
 	@FXML
@@ -161,28 +162,36 @@ public class Controller implements Initializable {
 	}
 
 	public void createNewUser() {
-		if (userEmail.getText().equals(userEmailConfirm.getText())&&userPassw.getText().equals(userPasswConfirm.getText())) {
-			if(userPassw.getLength()<8) {
-				System.out.println("contraseña tiene k ser mayor a 8 caracteres");
-			}else {
-			userFields.add(userName.getText());
-			userFields.add(userSurname1.getText() + " " + userSurname2.getText());
-			userFields.add(userEmail.getText());
-			userFields.add(userPassw.getText());
-			userFields.add(crearComboCiudad.getValue());
-			userFields.add(userAddress.getText());
-			userFields.add(userCP.getText());
-			userFields.add(userDNI.getText());
-			//la fecha no funcionaaaa, hay k repasarla
-			LocalDate localDate=userBirthday.getValue();
-			Date date = Date.from(localDate.atStartOfDay(ZoneId.systemDefault()).toInstant());
-			userFields.add(String.valueOf(date));
-			userFields.add(userPhoneNumber.getText());
-			userFields.add(userLanguage.getText());}
-		} else {
-			//aki lo suyo seria poner un label k se muestre x 3 sec
-			//como tenemos en el login principal
-			System.out.println("el email no coincide");
+		try {
+			if (userEmail.getText().equals(userEmailConfirm.getText())
+					&& userPassw.getText().equals(userPasswConfirm.getText())) {
+				if (userPassw.getLength() < 8) {
+					System.out.println("contraseña tiene k ser mayor a 8 caracteres");
+				} else {
+					userFields.add(userName.getText());
+					userFields.add(userSurname1.getText() + " " + userSurname2.getText());
+					userFields.add(userEmail.getText());
+					userFields.add(userPassw.getText());
+					userFields.add(crearComboCiudad.getValue());
+					userFields.add(userAddress.getText());
+					userFields.add(userCP.getText());
+					userFields.add(userDNI.getText());
+					LocalDate localDate = userBirthday.getValue();
+					Date date = Date.from(localDate.atStartOfDay(ZoneId.systemDefault()).toInstant());
+					DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS");
+					String strDate = dateFormat.format(date);
+					userFields.add(strDate);
+					userFields.add(userPhoneNumber.getText());
+					userFields.add(userLanguage.getText());
+				}
+			} else {
+				// aki lo suyo seria poner un label k se muestre x 3 sec
+				// como tenemos en el login principal
+				System.out.println("el email no coincide");
+			}
+		} catch (Exception e) {
+			System.out.println(e);
+			System.out.println("datos introducidos con errores, no se pueden recoger");
 		}
 	}
 
@@ -194,8 +203,22 @@ public class Controller implements Initializable {
 		switch (btn.getId()) {
 		case "createUserInfo":
 			createNewUser();
-			Conexion.Post_JSON_User_Create(userFields);
-			paneCreateAcc.setVisible(true);
+			if (userFields.size() == Conexion.userFields.length) {
+
+				newUser = Conexion.Post_JSON_User_Create(userFields);
+				if (newUser != null) {
+					paneCreateAcc.setVisible(true);
+				} else {
+					// tambien label con timer aki need
+					System.out.println("Error creando el user, la conexion con mongodb o api no ha funcionado");
+					paneAdduser.setVisible(true);
+				}
+			} else {
+				// tambien label con timer aki need
+				System.out.println("Error creando el user, no has rellenado los campos correctamente");
+				paneAdduser.setVisible(true);
+			}
+
 			break;
 		case "createUser":
 			paneLogin.setVisible(true);

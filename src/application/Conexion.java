@@ -5,7 +5,6 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.sql.Date;
 import java.util.ArrayList;
 
 import org.apache.commons.io.IOUtils;
@@ -15,8 +14,8 @@ import org.json.JSONObject;
 
 public class Conexion {
 	private static String url = "https://apiams2root.herokuapp.com";
-	private static String userFields[] = { "name", "surname", "email", "password", "province", "address", "cp", "dni",
-			"bithday", "phonenumber", "language" };
+	public static String userFields[] = { "name", "surname", "email", "password", "province", "address", "cp", "dni",
+			"birthday", "phonenumber", "language" };
 
 	public static JSONObject Post_JSON_Login(String email, String password) {
 		// Users user=new Users();
@@ -65,22 +64,18 @@ public class Conexion {
 	}
 
 	public static JSONObject Post_JSON_User_Create(ArrayList<String> userField) {
-		// String name, String surname, String email, String password, String province,
-		// String address, String cp, String dni, Date birthday, String phoneNumber,
-		// String language;
-		// Users user=new Users();
-		String query_url = url + "/users";
-		String json = "{\"" + userFields[0] + "\" : \"" + userField.get(0) + "\",";
-		for (int i = 1; i < userFields.length; i++) {
-			if (i == userFields.length - 1) {
-				json = json + "\"" + userFields[i] + "\" : \"" + userField.get(i) + "\"}";
+		try {
+			String query_url = url + "/users";
+			String json = "{\"" + userFields[0] + "\" : \"" + userField.get(0) + "\",";
+			for (int i = 1; i < userFields.length; i++) {
+				if (i == userFields.length - 1) {
+					json = json + "\"" + userFields[i] + "\" : \"" + userField.get(i) + "\"}";
+				} else {
+
+					json = json + "\"" + userFields[i] + "\" : \"" + userField.get(i) + "\",";
+				}
 			}
 
-			else {
-				json = json + "\"" + userFields[i] + "\" : \"" + userField.get(i) + "\",";
-			}
-		}
-		try {
 			URL url = new URL(query_url);
 			HttpURLConnection conn = (HttpURLConnection) url.openConnection();
 			conn.setConnectTimeout(5000);
