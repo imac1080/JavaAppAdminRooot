@@ -131,4 +131,33 @@ public class Conexion {
 		}
 	}
 
+	public static /*JSONArray*/void Get_JSON_AllEvents(JSONObject user) {
+		String query_url = url + "/events/all";
+		String activeToken = "";
+		try {
+			JSONArray arrtokens = user.getJSONArray("tokens");
+			activeToken = arrtokens.getJSONObject(arrtokens.length() - 1).getString("token");
+		} catch (JSONException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		try {
+			URL url = new URL(query_url);
+			HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+			conn.setConnectTimeout(5000);
+			conn.setRequestProperty("Authorization", "Bearer " + activeToken);
+			conn.setRequestProperty("Content-Type", "application/json; charset=UTF-8");
+			conn.setRequestMethod("GET");
+			// read the response
+			InputStream inS = new BufferedInputStream(conn.getInputStream());
+			String resultado = IOUtils.toString(inS, "UTF-8");
+			System.out.println(resultado);
+			inS.close();
+			conn.disconnect();
+			System.out.println("Events load all successfully");
+		} catch (Exception e) {
+			System.out.println(e);
+		}
+	}
+
 }

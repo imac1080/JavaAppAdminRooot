@@ -136,5 +136,15 @@
             <Button fx:id="createUser" layoutX="595.0" layoutY="461.0" minHeight="19.0" mnemonicParsing="false" onAction="#createUsers" prefHeight="39.0" prefWidth="111.0" text="Login" />
          </children>
       </Pane>
+      <Pane fx:id="paneUser" layoutX="20.0" layoutY="47.0" prefHeight="675.0" prefWidth="1300.0" visible="false">
+         <children>
+            <Label layoutX="139.0" layoutY="34.0" prefHeight="39.0" prefWidth="249.0" scaleX="2.0" scaleY="2.0" text="Espacio de la cuenta del user" textFill="#050094">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+            </Label>
+            <Button fx:id="showEvents" layoutX="15.0" layoutY="93.0" minHeight="19.0" mnemonicParsing="false" onAction="#eventButton" prefHeight="39.0" prefWidth="111.0" text="Eventos" />
+         </children>
+      </Pane>
    </children>
 </AnchorPane>

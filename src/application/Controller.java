@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.ResourceBundle;
 
+import org.json.JSONArray;
 import org.json.JSONObject;
 
 import javafx.collections.FXCollections;
@@ -34,6 +35,7 @@ public class Controller implements Initializable {
 	// private String user = "Sergio";
 	// private String password = "123456";
 	private JSONObject user, newUser;
+	private JSONArray events;
 	private ArrayList<String> userFields = new ArrayList<String>();
 	private ArrayList<Pane> pane = new ArrayList<>();
 	private ArrayList<MenuItem> menuItems = new ArrayList<>();
@@ -50,9 +52,9 @@ public class Controller implements Initializable {
 	@FXML
 	private PasswordField loginPassw, userCreatePassw, userCreatePass2;
 	@FXML
-	private Pane paneAdduser, paneLogin, paneMain, paneCreateAcc;
+	private Pane paneAdduser, paneLogin, paneMain, paneCreateAcc, paneUser;
 	@FXML
-	private Button loginEnter, createUserInfo, createUser, loginBtnPasswError, singUpButton;
+	private Button loginEnter, createUserInfo, createUser, loginBtnPasswError, singUpButton,showEvents;
 	@FXML
 	private DialogPane loginPasswError;
 	@FXML
@@ -68,6 +70,7 @@ public class Controller implements Initializable {
 		pane.add(paneAdduser);
 		pane.add(paneMain);
 		pane.add(paneCreateAcc);
+		pane.add(paneUser);
 
 		menuItems.add(menuConfig);
 		menuItems.add(menuUsuarios);
@@ -103,6 +106,14 @@ public class Controller implements Initializable {
 				errorLogin.setVisible(false);
 			}
 		};
+		ActionListener taskPerformer1 = new ActionListener() {
+
+			@Override
+			public void actionPerformed(java.awt.event.ActionEvent e) {
+				paneMain.setVisible(false);
+				paneUser.setVisible(true);
+			}
+		};
 		try {
 			user = Conexion.Post_JSON_Login(email, passwrd);
 		} catch (Exception e) {
@@ -114,6 +125,9 @@ public class Controller implements Initializable {
 			paneLogin.setVisible(false);
 			itemsTrue();
 			paneMain.setVisible(true);
+			javax.swing.Timer tick1 = new javax.swing.Timer(delay, taskPerformer1);
+			tick1.setRepeats(false);
+			tick1.start();
 		} else {
 			errorLogin.setText("Credenciales incorrectos");
 			errorLogin.setVisible(true);
@@ -192,6 +206,17 @@ public class Controller implements Initializable {
 		} catch (Exception e) {
 			System.out.println(e);
 			System.out.println("datos introducidos con errores, no se pueden recoger");
+		}
+	}
+	@FXML
+	private void eventButton(ActionEvent event) {
+		Button btn = (Button) event.getSource();
+		btn.getOnAction();
+		paneFalse();
+		switch (btn.getId()) {
+		case "showEvents":
+			Conexion.Get_JSON_AllEvents(user);
+			break;
 		}
 	}
 
