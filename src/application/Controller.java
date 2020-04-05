@@ -52,13 +52,13 @@ public class Controller implements Initializable {
 	@FXML
 	private PasswordField loginPassw, userCreatePassw, userCreatePass2;
 	@FXML
-	private Pane paneAdduser, paneLogin, paneMain, paneCreateAcc, paneUser;
+	private Pane paneAdduser, paneLogin, paneMain, paneCreateAcc, paneUser, paneUserList, paneEventCreate, paneEventList;
 	@FXML
-	private Button loginEnter, createUserInfo, createUser, loginBtnPasswError, singUpButton,showEvents;
+	private Button loginEnter, createUserInfo, createUser, loginBtnPasswError, singUpButton,showEvents, createEventInfo;
 	@FXML
 	private DialogPane loginPasswError;
 	@FXML
-	private ComboBox<String> crearComboCiudad;
+	private ComboBox<String> crearComboCiudad, eventComboPartida, eventComboLlegada, eventComboValidez;
 	@FXML
 	private Label errorLogin;
 	@FXML
@@ -71,6 +71,9 @@ public class Controller implements Initializable {
 		pane.add(paneMain);
 		pane.add(paneCreateAcc);
 		pane.add(paneUser);
+		pane.add(paneUserList);
+		pane.add(paneEventCreate);
+		pane.add(paneEventList);
 
 		menuItems.add(menuConfig);
 		menuItems.add(menuUsuarios);
@@ -81,14 +84,19 @@ public class Controller implements Initializable {
 		ivPassword.setImage(new Image("/Imagenes/LoginPassword.png"));
 		ivLoginLogo.setImage(new Image("/Imagenes/LoginLogoInter.png"));
 		ivMainLogo.setImage(new Image("/Imagenes/MainLogo.jpg"));
-		ObservableList<String> items = FXCollections.observableArrayList();
-		items.addAll("Alava", "Albacete", "Alicante", "Almería", "Asturias", "Avila", "Badajoz", "Barcelona", "Burgos",
+		ObservableList<String> itemsProvincias = FXCollections.observableArrayList();
+		itemsProvincias.addAll("Alava", "Albacete", "Alicante", "Almería", "Asturias", "Avila", "Badajoz", "Barcelona", "Burgos",
 				"Cáceres", "Cádiz", "Cantabria", "Castellón", "Ciudad Real", "Córdoba", "La Coruña", "Cuenca", "Gerona",
 				"Granada", "Guadalajara", "Guipúzcoa", "Huelva", "Huesca", "Islas Baleares", "Jaén", "León", "Lérida",
 				"Lugo", "Madrid", "Málaga", "Murcia", "Navarra", "Orense", "Palencia", "Las Palmas", "Pontevedra",
 				"La Rioja", "Salamanca", "Segovia", "Sevilla", "Soria", "Tarragona", "Santa Cruz de Tenerife", "Teruel",
 				"Toledo", "Valencia", "Valladolid", "Vizcaya", "Zamora", "Zaragoza");
-		crearComboCiudad.setItems(items);
+		crearComboCiudad.setItems(itemsProvincias);
+		eventComboPartida.setItems(itemsProvincias);
+		eventComboLlegada.setItems(itemsProvincias);
+		ObservableList<String> itemsValidez = FXCollections.observableArrayList();
+		itemsValidez.addAll("True", "False");
+		eventComboValidez.setItems(itemsValidez);
 
 	}
 
@@ -170,6 +178,15 @@ public class Controller implements Initializable {
 			Conexion.Post_JSON_LogOutAll(user);
 			user = null;
 			break;
+		case "userList":
+			paneUserList.setVisible(true);
+			break;
+		case "eventCreate":
+			paneEventCreate.setVisible(true);
+			break;
+		case "eventList":
+			paneEventList.setVisible(true);
+			break;
 		default:
 			break;
 		}
@@ -250,6 +267,43 @@ public class Controller implements Initializable {
 			break;
 		case "singUpButton":
 			paneAdduser.setVisible(true);
+			break;
+		}
+	}
+	
+	@FXML
+	private void createEvent(ActionEvent event) {
+		Button btn = (Button) event.getSource();
+		btn.getOnAction();
+		paneFalse();
+		switch (btn.getId()) {
+		case "createEventInfo":
+			paneMain.setVisible(true);
+			/*
+			createNewUser();
+			if (userFields.size() == Conexion.userFields.length) {
+
+				newUser = Conexion.Post_JSON_User_Create(userFields);
+				if (newUser != null) {
+					paneCreateAcc.setVisible(true);
+				} else {
+					// tambien label con timer aki need
+					System.out.println("Error creando el user, la conexion con mongodb o api no ha funcionado");
+					paneAdduser.setVisible(true);
+				}
+			} else {
+				// tambien label con timer aki need
+				System.out.println("Error creando el user, no has rellenado los campos correctamente");
+				paneAdduser.setVisible(true);
+			}
+
+			break;
+		case "createUser":
+			paneLogin.setVisible(true);
+			break;
+		case "singUpButton":
+			paneAdduser.setVisible(true);
+			*/
 			break;
 		}
 	}
