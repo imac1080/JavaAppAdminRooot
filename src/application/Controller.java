@@ -1,6 +1,7 @@
 package application;
 
 import java.awt.event.ActionListener;
+
 import java.net.URL;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -25,17 +26,21 @@ import javafx.scene.control.DialogPane;
 import javafx.scene.control.Label;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.PasswordField;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 
 public class Controller implements Initializable {
-	// private String user = "Sergio";
-	// private String password = "123456";
 	private JSONObject user, newUser;
-	private JSONArray events;
+	private JSONArray allUsers, events;
+	
+	private static ArrayList<Users> users;
+	
 	private ArrayList<String> userFields = new ArrayList<String>();
 	private ArrayList<Pane> pane = new ArrayList<>();
 	private ArrayList<MenuItem> menuItems = new ArrayList<>();
@@ -63,9 +68,47 @@ public class Controller implements Initializable {
 	private Label errorLogin;
 	@FXML
 	private ImageView ivProblemas, ivUser, ivPassword, ivLoginLogo, ivMainLogo;
+	@FXML
+	private TableView<Users> userTable, eventTable;
+	@FXML
+	private TableColumn<Users,String> userColumnName, userColumnSurname, userColumnEmail, userColumnProvince, userColumnDirection, userColumnCP, userColumnDNI, userColumnDate, userColumnPhone, userColumnLanguage,
+	eventColumnName, eventColumnValidate, eventColumnStartProvince, eventColumnStartDate,eventColumnStartHour, eventColumnEndProvince, eventColumnEndDate, eventColumnEndHour, eventColumnLanguage, eventColumnNPersons;
 
+	//Habia puesto en vez de Users, Conexion y no salta error pero sabia que estaba mal asi que mejor te lo dejo asi para que sepas los que hay que cambiar.
+	
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
+		
+		ObservableList<Users> obsUser = FXCollections.observableArrayList(users);
+		userColumnName.setCellValueFactory(new PropertyValueFactory<Users, String>("nombre"));
+		userColumnSurname.setCellValueFactory(new PropertyValueFactory<Users, String>("apellido1"));
+		userColumnEmail.setCellValueFactory(new PropertyValueFactory<Users, String>("email"));
+		userColumnDNI.setCellValueFactory(new PropertyValueFactory<Users, String>("dni"));
+		userColumnProvince.setCellValueFactory(new PropertyValueFactory<Users, String>("provincia"));
+		userColumnDirection.setCellValueFactory(new PropertyValueFactory<Users, String>("direccion"));
+		userColumnCP.setCellValueFactory(new PropertyValueFactory<Users, Double>("cp"));
+		userColumnPhone.setCellValueFactory(new PropertyValueFactory<Users, Double>("telefono"));
+		userColumnDate.setCellValueFactory(new PropertyValueFactory<Users, String>("fecha"));
+		userColumnLanguage.setCellValueFactory(new PropertyValueFactory<Users, String>("idioma"));
+		userTable.setItems(obsUser);
+		userTable.setEditable(false);
+		
+		ObservableList<Users> obsEvent = FXCollections.observableArrayList(users);
+		eventColumnName.setCellValueFactory(new PropertyValueFactory<Users, String>("nombreEvento"));
+		eventColumnValidate.setCellValueFactory(new PropertyValueFactory<Users, String>("validate"));
+		eventColumnStartProvince.setCellValueFactory(new PropertyValueFactory<Users, String>("startProvince"));
+		eventColumnStartDate.setCellValueFactory(new PropertyValueFactory<Users, String>("startDate"));
+		eventColumnStartHour.setCellValueFactory(new PropertyValueFactory<Users, String>("startHour"));
+		eventColumnEndProvince.setCellValueFactory(new PropertyValueFactory<Users, String>("endProvince"));
+		eventColumnEndDate.setCellValueFactory(new PropertyValueFactory<Users, String>("endDate"));
+		eventColumnEndHour.setCellValueFactory(new PropertyValueFactory<Users, String>("endHour"));
+		eventColumnLanguage.setCellValueFactory(new PropertyValueFactory<Users, String>("eventLanguage"));
+		eventColumnNPersons.setCellValueFactory(new PropertyValueFactory<Users, Double>("nPersonas"));
+		eventTable.setItems(obsEvent);
+		eventTable.setEditable(false);
+		
+		
+		
 		pane.add(paneLogin);
 		pane.add(paneAdduser);
 		pane.add(paneMain);
@@ -197,7 +240,7 @@ public class Controller implements Initializable {
 			if (userEmail.getText().equals(userEmailConfirm.getText())
 					&& userPassw.getText().equals(userPasswConfirm.getText())) {
 				if (userPassw.getLength() < 8) {
-					System.out.println("contraseña tiene k ser mayor a 8 caracteres");
+					System.out.println("contraseña tiene que ser mayor a 8 caracteres");
 				} else {
 					userFields.add(userName.getText());
 					userFields.add(userSurname1.getText() + " " + userSurname2.getText());
@@ -325,4 +368,14 @@ public class Controller implements Initializable {
 			pane.get(i).setVisible(false);
 		}
 	}
+	/*
+	public static void llenarArray() {
+		users = new ArrayList<>();
+		users.add(new Users("Manolo", "Escobar", "Zec", "25369841V","Escobar@hotmail.com","5674875","Barcelona","Valencia 190",8011,657483945));
+		users.add(new Users("Benito" ," Garcia","Foco", "25369841V","Benito@hotmail.com", "sddwee","Zaragoza","Torrejon 33",80122,645543945));
+		users.add(new Users("Llorente","Ruiz","Santos", "17849652B","Llorente@hotmail.com", "profesor","Tarragona","Spork 11",8934,757483945));
+		users.add(new Users("Maria", "Carrasco","Meloso", "88874569N","Maria@hotmail.com", "h4g2o1","Madrid","Fisto 42",013323,657483945));
+		users.add(new Users("Luis" ,"Comunica","Dieguez", "98746321R","Luis@hotmail.com", "poncho","Lerida","Pick 99",338933,657483945));
+	}
+	*/
 }

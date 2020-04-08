@@ -69,7 +69,7 @@
             <DatePicker fx:id="userBirthday" layoutX="268.0" layoutY="501.0" prefHeight="38.0" prefWidth="326.0" promptText="Fecha de nacimiento" />
          </children>
       </Pane>
-      <Pane fx:id="paneLogin" layoutY="27.0" prefHeight="675.0" prefWidth="1300.0">
+      <Pane fx:id="paneLogin" layoutY="27.0" prefHeight="675.0" prefWidth="1300.0" visible="false">
          <children>
             <TextField fx:id="loginUser" layoutX="574.0" layoutY="310.0" promptText="Email" scaleX="2.0" scaleY="1.5" />
             <PasswordField fx:id="loginPassw" layoutX="574.0" layoutY="400.0" promptText="Password" scaleX="2.0" scaleY="1.5" />
@@ -148,20 +148,20 @@
             <Button fx:id="showEvents" layoutX="15.0" layoutY="93.0" minHeight="19.0" mnemonicParsing="false" onAction="#eventButton" prefHeight="39.0" prefWidth="111.0" text="Eventos" />
          </children>
       </Pane>
-      <Pane fx:id="paneUserList" layoutY="47.0" prefHeight="675.0" prefWidth="1314.0" visible="false">
+      <Pane fx:id="paneUserList" layoutY="47.0" prefHeight="675.0" prefWidth="1314.0">
          <children>
-            <TableView prefHeight="675.0" prefWidth="1314.0">
+            <TableView fx:id="userTable" prefHeight="675.0" prefWidth="1314.0">
                <columns>
-                  <TableColumn prefWidth="131.4" text="Nombre" />
-                  <TableColumn prefWidth="131.4" text="Apellido" />
-                  <TableColumn prefWidth="131.4" text="Email" />
-                  <TableColumn prefWidth="131.4" text="Província" />
-                  <TableColumn prefWidth="131.4" text="Dirección" />
-                  <TableColumn prefWidth="131.4" text="CP" />
-                  <TableColumn prefWidth="131.4" text="DNI" />
-                  <TableColumn prefWidth="131.4" text="Fecha" />
-                  <TableColumn prefWidth="131.4" text="Teléfono" />
-                  <TableColumn prefWidth="131.4" text="Idiomas" />
+                  <TableColumn fx:id="userColumnName" prefWidth="131.4" text="Nombre" />
+                  <TableColumn fx:id="userColumnSurname" prefWidth="131.4" text="Apellido" />
+                  <TableColumn fx:id="userColumnEmail" prefWidth="131.4" text="Email" />
+                  <TableColumn fx:id="userColumnProvince" prefWidth="131.4" text="Província" />
+                  <TableColumn fx:id="userColumnDirection" prefWidth="131.4" text="Dirección" />
+                  <TableColumn fx:id="userColumnCP" prefWidth="131.4" text="CP" />
+                  <TableColumn fx:id="userColumnDNI" prefWidth="131.4" text="DNI" />
+                  <TableColumn fx:id="userColumnDate" prefWidth="131.4" text="Fecha" />
+                  <TableColumn fx:id="userColumnPhone" prefWidth="131.4" text="Teléfono" />
+                  <TableColumn fx:id="userColumnLanguage" prefWidth="131.4" text="Idiomas" />
                </columns>
             </TableView>
          </children>
@@ -187,18 +187,18 @@
       </Pane>
       <Pane fx:id="paneEventList" layoutX="3.0" layoutY="37.0" prefHeight="675.0" prefWidth="1314.0" visible="false">
          <children>
-            <TableView layoutX="-7.0" layoutY="8.0" prefHeight="668.0" prefWidth="1314.0">
+            <TableView fx:id="eventTable" layoutX="-7.0" layoutY="8.0" prefHeight="668.0" prefWidth="1314.0">
                <columns>
-                  <TableColumn prefWidth="131.4" text="Nombre" />
-                  <TableColumn prefWidth="131.4" text="Validez" />
-                  <TableColumn prefWidth="131.4" text="Provincia de partida" />
-                  <TableColumn prefWidth="131.4" text="Fecha de salida" />
-                  <TableColumn prefWidth="131.4" text="Hora de salida" />
-                  <TableColumn prefWidth="131.4" text="Provincia de llegada" />
-                  <TableColumn prefWidth="131.4" text="Fecha de llegada" />
-                  <TableColumn prefWidth="131.4" text="Hora de llegada" />
-                  <TableColumn prefWidth="131.4" text="Idioma" />
-                  <TableColumn prefWidth="131.4" text="Nº de personas" />
+                  <TableColumn fx:id="eventColumnName" prefWidth="131.4" text="Nombre" />
+                  <TableColumn fx:id="eventColumnValidate" prefWidth="131.4" text="Validez" />
+                  <TableColumn fx:id="eventColumnStartProvince" prefWidth="131.4" text="Provincia de partida" />
+                  <TableColumn fx:id="eventColumnStartDate" prefWidth="131.4" text="Fecha de salida" />
+                  <TableColumn fx:id="eventColumnStartHour" prefWidth="131.4" text="Hora de salida" />
+                  <TableColumn fx:id="eventColumnEndProvince" prefWidth="131.4" text="Provincia de llegada" />
+                  <TableColumn fx:id="eventColumnEndDate" prefWidth="131.4" text="Fecha de llegada" />
+                  <TableColumn fx:id="eventColumnEndHour" prefWidth="131.4" text="Hora de llegada" />
+                  <TableColumn fx:id="eventColumnLanguage" prefWidth="131.4" text="Idioma" />
+                  <TableColumn fx:id="eventColumnNPersons" prefWidth="131.4" text="Nº de personas" />
                </columns>
             </TableView>
          </children>
